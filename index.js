@@ -19,7 +19,7 @@ app.use(express.static("public")); // Static
 
 // GET '/' is always what will be displayed on the home page of your application
 app.get("/", (req, res) => {
-  res.sendFile(__dirname + "/" + "users.html");
+  res.sendFile(__dirname + "/" + "index.html");
 });
 // Use individual routes when visiting these URLS
 app.use("/users", userRoute);

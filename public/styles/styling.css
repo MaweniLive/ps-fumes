@@ -1,0 +1,18 @@
+/*START OF NAVBAR*/
+.navbar-brand {
+  /* transform: rotate(350deg);*/
+  font-family: fira sans;
+  font-size: 30px;
+}
+.nav-item {
+  font-size: 20px;
+}
+a:hover {
+  color: #000;
+}
+.nav-link:hover {
+  font-size: 1rem;
+  background-color: blue;
+  border-radius: 20%;
+}
+/*END OF NAVBAR*/

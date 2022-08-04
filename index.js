@@ -23,7 +23,7 @@ app.get("/", (req, res) => {
 });
 
 // GET '/' is always what will be displayed on the home page of your application
-app.get("/", (req, res) => {
+app.get("/products", (req, res) => {
   res.sendFile(__dirname + "/products" + "products.html");
 });
 // Use individual routes when visiting these URLS

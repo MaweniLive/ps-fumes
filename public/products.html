@@ -13,29 +13,19 @@
   <thead>
     <tr>
       <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
+      <th scope="col">Sku</th>
+      <th scope="col">Name</th>
+      <th scope="col">Price</th>
+      <th scope="col">Weight</th>
+      <th scope="col">Descriptions</th>
+      <th scope="col">Thumbnail</th>
+      <th scope="col">Image</th>
+      <th scope="col">Category</th>
+      <th scope="col">Create_date</th>
+      <th scope="col">Stock</th>
     </tr>
   </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td colspan="2">Larry the Bird</td>
-      <td>@twitter</td>
-    </tr>
+  <tbody class="body">
   </tbody>
 </table>
         <script>
@@ -43,8 +33,10 @@
         .then((res) => res.json())
         .then((data) => {
           data.forEach((i) => {
-            document.querySelector(".table").innerHTML += `<tr>
+            document.querySelector(".body").innerHTML += `<tr>
+              <th scope="row">
                  <td>${i.product_id}</td>
+                 </th>
                  <td>${i.sku}</td>
                  <td>${i.name}</td>
                  <td>${i.price}</td>

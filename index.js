@@ -16,9 +16,15 @@ app.use(cors()); // Dont let local development give errors
 app.use(express.static("public")); // Static
 
 // This is where we check URLs and Request methods to create functionality
+
 // GET '/' is always what will be displayed on the home page of your application
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/" + "users.html");
+});
+
+// GET '/' is always what will be displayed on the home page of your application
+app.get("/", (req, res) => {
+  res.sendFile(__dirname + "/products" + "products.html");
 });
 // Use individual routes when visiting these URLS
 app.use("/users", userRoute);

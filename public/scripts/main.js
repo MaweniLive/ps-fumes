@@ -22,9 +22,7 @@ fetch("http://localhost:6969/users")
         .then((data) => {
           data.forEach((i) => {
             document.querySelector(".body").innerHTML += `<tr>
-              <th scope="row">
                  <td>${i.product_id}</td>
-                 </th>
                  <td>${i.sku}</td>
                  <td>${i.name}</td>
                  <td>${i.price}</td>

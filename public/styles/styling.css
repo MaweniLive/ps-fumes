@@ -10,9 +10,4 @@
 a:hover {
   color: #000;
 }
-.nav-link:hover {
-  font-size: 1rem;
-  background-color: blue;
-  border-radius: 20%;
-}
 /*END OF NAVBAR*/

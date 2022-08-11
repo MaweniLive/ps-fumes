@@ -37,19 +37,23 @@ router.get("/:id", (req, res) => {
 // Adding A User
 
 router.post("/", (req, res) => {
-  const {
-    email,
-    password,
-    full_name,
-    billing_address,
-    default_shipping_address,
-    country,
-    phone,
-    user_type,
-  } = req.body;
+  const { 
+    email, 
+    password, 
+    fullname, 
+    joinDate, 
+    userRole, 
+    phone, 
+    cart 
+  } =
+    req.body;
   try {
     con.query(
-      `INSERT INTO users (email,password,full_name,billing_address,default_shipping_address,country,phone,user_type) VALUES ('${email}','${password}','${full_name}','${billing_address}','${default_shipping_address}','${country}','${phone}','${user_type}')`,
+      `INSERT INTO users (email,password,fullname,joinDate,
+        userRole,phone,cart)
+         VALUES ('${email}','${password}','${fullname}',
+         '${joinDate}','${userRole}',
+         '${phone}','${cart}')`,
       (err, result) => {
         if (err) throw err;
         res.send(result);
@@ -64,20 +68,23 @@ router.post("/", (req, res) => {
 // Editing A User
 
 router.put("/:id", (req, res) => {
-  const {
-    email,
-    password,
-    full_name,
-    billing_address,
-    default_shipping_address,
-    country,
-    phone,
-    user_type,
-  } = req.body;
+  const { 
+    email, 
+    password, 
+    fullname, 
+    joinDate, 
+    userRole, 
+    phone, 
+    cart } =
+    req.body;
 
   try {
     con.query(
-      `UPDATE users SET email='${email}', password='${password}', full_name='${full_name}', billing_address='${billing_address}', default_shipping_address='${default_shipping_address}', country='${country}', phone='${phone}', user_type='${user_type}' WHERE user_id = ${req.params.id}`,
+      `UPDATE users SET email='${email}', password='${password}', 
+      fullname='${fullname}', joinDate='${joinDate}', 
+      userRole='${userRole}', 
+      cart='${cart}', phone='${phone}'
+       WHERE user_id = ${req.params.id}`,
       (err, result) => {
         if (err) throw err;
         res.send(result);

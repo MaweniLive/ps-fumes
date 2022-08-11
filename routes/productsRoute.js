@@ -18,7 +18,7 @@ router.get("/", (req, res) => {
 router.get("/:id", (req, res) => {
   try {
     con.query(
-      `SELECT * FROM users WHERE product_id = ${req.params.id}`,
+      `SELECT * FROM products WHERE product_id = ${req.params.id}`,
       (err, result) => {
         if (err) throw err;
         res.send(result);
@@ -33,22 +33,22 @@ router.get("/:id", (req, res) => {
 //Insert a new product
 router.post("/", (req, res) => {
   const {
-    sku,
-    name,
-    price,
-    weight,
-    descriptions,
-    thumbnail,
-    image,
+    title,
     category,
-    create_date,
-    stock,
+    description,
+    imgURL,
+    price,
+    user_id,
+    quantity,
   } = req.body;
   try {
     con.query(
-      `INSERT INTO products (sku, name, price, weight, descriptions, thumbnail, image, category, create_date, stock) 
+      `INSERT INTO products (title, category, description, imgURL, price, 
+        user_id, quantity) 
       values 
-      ('${sku}', '${name}', '${price}', '${weight}','${descriptions}', '${thumbnail}', '${image}', '${category}', '${create_date}', '${stock}' ) `,
+      ('${title}', '${category}', '${price}', 
+      '${description}','${imgURL}', '${price}', 
+      '${user_id}', '${quantity}') `,
       (err, result) => {
         if (err) throw err;
         res.send(result);

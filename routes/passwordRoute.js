@@ -23,13 +23,12 @@ router.put("reset-psw/:id", (req, res) => {
       const hash = bcrypt.hashSync(req.body.password, salt);
 
       const updatedPassword = {
-        full_name: result[0].full_name,
+        fullname: result[0].fullname,
         email: result[0].email,
-        user_type: result[0].user_type,
+        userRole: result[0].userRole,
         phone: result[0].phone,
-        country: result[0].country,
-        billing_address: result[0].billing_address,
-        default_shipping_address: result[0].default_shipping_address,
+        joinDate: result[0].joinDate,
+        cart: result[0].cart,
 
         // Only thing im changing in table
         password: hash,

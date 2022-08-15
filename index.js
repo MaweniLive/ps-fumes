@@ -32,7 +32,7 @@ app.get("/", (req, res) => {
   // res.setHeader("Access-Control-Allow-Origin", "*");
   // res.setHeader("Access-Control-Allow-Headers", "*");
   // res.sendFile(__dirname + "/" + "index.html");
-  
+  res.send("Morning world")
 });
 // Use individual routes when visiting these URLS
 app.use("/users", userRoute);

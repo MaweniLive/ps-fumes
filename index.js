@@ -31,7 +31,8 @@ app.use((req, res, next) => {
 app.get("/", (req, res) => {
   // res.setHeader("Access-Control-Allow-Origin", "*");
   // res.setHeader("Access-Control-Allow-Headers", "*");
-  res.sendFile(__dirname + "/" + "index.html");
+  // res.sendFile(__dirname + "/" + "index.html");
+  
 });
 // Use individual routes when visiting these URLS
 app.use("/users", userRoute);

@@ -32,7 +32,7 @@ app.use((req, res, next) => {
 app.use("/users", userRoute);
 
 // Use individual routes when visiting these URLS
-app.use(productsRoute);
+app.use("/products",  productsRoute);
 
 // Use individual routes when visiting these URLS
 app.use("/categories", categoriesRoute);

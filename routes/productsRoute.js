@@ -6,7 +6,7 @@ const con = require("../lib/dbConnection");
 router.get("/", (req, res) => {
   try {
     con.query("SELECT * FROM products", (err, result) => {
-      if (err) throw err;
+      if (err) throw err.message;
       res.send(result);
     });
   } catch (error) {

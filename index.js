@@ -41,8 +41,8 @@ app.use("/categories", categoriesRoute);
 app.use("/orders", ordersRoute);
 
 app.get("/", (req, res) => {
-  // res.setHeader("Access-Control-Allow-Origin", "*");
-  // res.setHeader("Access-Control-Allow-Headers", "*");
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Headers", "*");
   // res.sendFile(__dirname + "/" + "index.html");
   res.send("Morning world");
 });

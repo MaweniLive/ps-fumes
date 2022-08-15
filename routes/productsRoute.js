@@ -4,6 +4,7 @@ const con = require("../lib/dbConnection");
 
 //Get all product
 router.get("/", (req, res) => {
+   res.setHeader("Access-Control-Allow-Origin", "*");
   try {
     con.query("SELECT * FROM products", (err, result) => {
       if (err) throw err.message;

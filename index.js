@@ -3,10 +3,10 @@ const express = require("express"); // Used to set up a server
 const cors = require("cors"); // Used to prevent errors when working locally
 
 // Import routes
-// const userRoute = require("./routes/userRoute");
-// const productsRoute = require("./routes/productsRoute");
-// const categoriesRoute = require("./routes/categoriesRoute");
-// const ordersRoute = require("./routes/ordersRoute");
+const userRoute = require("./routes/userRoute");
+const productsRoute = require("./routes/productsRoute");
+const categoriesRoute = require("./routes/categoriesRoute");
+const ordersRoute = require("./routes/ordersRoute");
 
 // Configure Server
 const app = express(); // Initialize express as an app variable
@@ -29,10 +29,10 @@ app.use((req, res, next) => {
 
 // GET '/' is always what will be displayed on the home page of your application
 // Use individual routes when visiting these URLS
-app.use( userRoute);
+app.use("/users", userRoute);
 
 // Use individual routes when visiting these URLS
-app.use( productsRoute);
+app.use(productsRoute);
 
 // Use individual routes when visiting these URLS
 app.use("/categories", categoriesRoute);

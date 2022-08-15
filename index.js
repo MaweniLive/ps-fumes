@@ -1,12 +1,7 @@
 // Import needed libraries
 const express = require("express"); // Used to set up a server
 const cors = require("cors"); // Used to prevent errors when working locally
-app.use(
-  cors({
-    origin: ["http://127.0.0.1:6969", "http://localhost:6969"],
-    credentials: true,
-  })
-);
+
 // Import routes
 const userRoute = require("./routes/userRoute");
 const productsRoute = require("./routes/productsRoute");
@@ -15,10 +10,16 @@ const ordersRoute = require("./routes/ordersRoute");
 
 // Configure Server
 const app = express(); // Initialize express as an app variable
+app.use(
+  cors({
+    origin: ["http://127.0.0.1:8080", "http://localhost:8080"],
+    credentials: true,
+  })
+); // Dont let local development give errors
 app.set("port", process.env.PORT || 6969); // Set the port
 app.use(express.json()); // Enable the server to handle JSON requests
-app.use(cors()); // Dont let local development give errors
 app.use(express.static("public")); // Static
+
 // This is where we check URLs and Request methods to create functionality
 
 // GET '/' is always what will be displayed on the home page of your application

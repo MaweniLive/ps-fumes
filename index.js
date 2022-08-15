@@ -18,7 +18,7 @@ app.use(
 ); // Dont let local development give errors
 app.set("port", process.env.PORT || 6969); // Set the port
 app.use(express.json()); // Enable the server to handle JSON requests
-app.use(express.static("public")); // Static
+// app.use(express.static("public")); // Static
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Headers", "*");
@@ -28,12 +28,6 @@ app.use((req, res, next) => {
 // This is where we check URLs and Request methods to create functionality
 
 // GET '/' is always what will be displayed on the home page of your application
-app.get("/", (req, res) => {
-  // res.setHeader("Access-Control-Allow-Origin", "*");
-  // res.setHeader("Access-Control-Allow-Headers", "*");
-  // res.sendFile(__dirname + "/" + "index.html");
-  res.send("Morning world")
-});
 // Use individual routes when visiting these URLS
 app.use("/users", userRoute);
 
@@ -45,6 +39,13 @@ app.use("/categories", categoriesRoute);
 
 // Use individual routes when visiting these URLS
 app.use("/orders", ordersRoute);
+
+app.get("/", (req, res) => {
+  // res.setHeader("Access-Control-Allow-Origin", "*");
+  // res.setHeader("Access-Control-Allow-Headers", "*");
+  // res.sendFile(__dirname + "/" + "index.html");
+  res.send("Morning world");
+});
 
 // Set up server to start listening for requests
 app.listen(app.get("port"), () => {

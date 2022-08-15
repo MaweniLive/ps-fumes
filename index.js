@@ -29,8 +29,8 @@ app.use((req, res, next) => {
 
 // GET '/' is always what will be displayed on the home page of your application
 app.get("/", (req, res) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Headers", "*");
+  // res.setHeader("Access-Control-Allow-Origin", "*");
+  // res.setHeader("Access-Control-Allow-Headers", "*");
   res.sendFile(__dirname + "/" + "index.html");
 });
 // Use individual routes when visiting these URLS

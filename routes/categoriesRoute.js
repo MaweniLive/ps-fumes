@@ -14,7 +14,8 @@ router.get("/", (req, res) => {
 });
 
 router.post("/", (req, res) => {
-  const { name,
+  const { 
+     name,
      description, 
      thumbnail 
     }

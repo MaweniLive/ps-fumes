@@ -31,13 +31,12 @@ async function Login(req, res) {
           const payload = {
             user: {
               user_id: result[0].user_id,
-              full_name: result[0].full_name,
+              fullname: result[0].fullname,
               email: result[0].email,
-              user_type: result[0].user_type,
+              userRole: result[0].userRole,
               phone: result[0].phone,
-              country: result[0].country,
-              billing_address: result[0].billing_address,
-              default_shipping_address: result[0].default_shipping_address,
+              joinDate: result[0].joinDate,
+              cart: result[0].joinDate
             },
           };
 
@@ -63,27 +62,29 @@ async function Login(req, res) {
 }
 
 async function Register(req, res) {
-     const {
-       full_name,
-       email,
-       password,
-       user_type,
-       phone,
-       country,
-       billing_address,
-       default_shipping_address,
-     } = req.body;
+     const { 
+      email, 
+      password, 
+      fullname, 
+      joinDate, 
+      userRole, 
+      phone
+       } =
+       req.body;
 
      const salt = bcrypt.genSaltSync(10);
      const hash = bcrypt.hashSync(password, salt);
 
      try {
        con.query(
-         `INSERT INTO users (full_name,email,password,user_type,phone,country,billing_address,default_shipping_address) VALUES ('${full_name}','${email}','${hash}','${user_type}','${phone}','${country}','${billing_address}','${default_shipping_address}')`,
+         `INSERT INTO users SET ? (fullname, email, password, userRole, phone) 
+          VALUES ('${fullname}',
+          '${email}','${hash}','${userRole}','${phone}',
+          '${joinDate}')`,
          (err, result) => {
            if (err) throw err;
            console.log(result);
-           res.send(`User ${(full_name, email)} created successfully`);
+           res.send(`User ${(fullname, email)} created successfully`);
          }
        );
      } catch (error) {

@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const con = require("../lib/dbConnection");
-const authController = require("../contoller/auth");
+const authController = require("../controller/auth");
 
 // Getting All Users
 
@@ -43,17 +43,16 @@ router.post("/", (req, res) => {
     fullname, 
     joinDate, 
     userRole, 
-    phone, 
-    cart 
+    phone 
   } =
     req.body;
   try {
     con.query(
       `INSERT INTO users (email,password,fullname,joinDate,
-        userRole,phone,cart)
+        userRole,phone)
          VALUES ('${email}','${password}','${fullname}',
          '${joinDate}','${userRole}',
-         '${phone}','${cart}')`,
+         '${phone}')`,
       (err, result) => {
         if (err) throw err;
         res.send(result);
@@ -74,16 +73,15 @@ router.put("/:id", (req, res) => {
     fullname, 
     joinDate, 
     userRole, 
-    phone, 
-    cart } =
+    phone 
+  } =
     req.body;
 
   try {
     con.query(
       `UPDATE users SET email='${email}', password='${password}', 
       fullname='${fullname}', joinDate='${joinDate}', 
-      userRole='${userRole}', 
-      cart='${cart}', phone='${phone}'
+      userRole='${userRole}', phone='${phone}'
        WHERE user_id = ${req.params.id}`,
       (err, result) => {
         if (err) throw err;

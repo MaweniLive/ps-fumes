@@ -5,16 +5,13 @@ fetch("http://localhost:6969/products")
     data.forEach((i) => {
       document.querySelector(".body").innerHTML += `<tr>
                  <td>${i.product_id}</td>
-                 <td>${i.sku}</td>
-                 <td>${i.name}</td>
-                 <td>${i.price}</td>
-                 <td>${i.weight}</td>
-                 <td>${i.descriptions}</td>
-                 <td>${i.thumbnail}</td>
-                 <td>${i.image}</td>
+                 <td>${i.title}</td>
                  <td>${i.category}</td>
-                 <td>${i.create_date}</td>
-                 <td>${i.stock}</td>
+                 <td>${i.description}</td>
+                 <td>${i.imgURL}</td>
+                 <td>${i.price}</td>
+                 <td>${i.user_id}</td>
+                 <td>${i.quantity}</td>
                  </tr>`;
     });
   });

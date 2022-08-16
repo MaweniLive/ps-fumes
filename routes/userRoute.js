@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const con = require("../lib/dbConnection");
-const authController = require("../controller/auth");
 
 // Getting All Users
 
@@ -23,36 +22,6 @@ router.get("/:id", (req, res) => {
   try {
     con.query(
       `SELECT * FROM users WHERE user_id = ${req.params.id}`,
-      (err, result) => {
-        if (err) throw err;
-        res.send(result);
-      }
-    );
-  } catch (error) {
-    console.log(error);
-    res.status(400).send(error);
-  }
-});
-
-// Adding A User
-
-router.post("/", (req, res) => {
-  const { 
-    email, 
-    password, 
-    fullname, 
-    joinDate, 
-    userRole, 
-    phone 
-  } =
-    req.body;
-  try {
-    con.query(
-      `INSERT INTO users (email,password,fullname,joinDate,
-        userRole,phone)
-         VALUES ('${email}','${password}','${fullname}',
-         '${joinDate}','${userRole}',
-         '${phone}')`,
       (err, result) => {
         if (err) throw err;
         res.send(result);
@@ -121,16 +90,97 @@ const { request } = require("express");
 // Register Route
 
 router.post("/register", (req, res) => {
- return authController.Register(req, res)
+  try {
+    let sql = "INSERT INTO users SET ?";
+    // This is the body in requesting
+    const { 
+      fullname, 
+      email, 
+      password, 
+      phone, 
+      joinDate, 
+      userRole 
+    } =
+      req.body;
+
+    // The start of hashing / encryption
+    const salt = bcrypt.genSaltSync(10);
+    const hash = bcrypt.hashSync(password, salt);
+
+    let user = {
+      fullname,
+      email,
+      // We sending the hash value to be stored within the table
+      password: hash,
+      phone,
+      joinDate,
+      userRole,
+    };
+
+    // connection to the database
+    con.query(sql, user, (err, result) => {
+      if (err) throw err;
+      console.log(result);
+      res.send(`User ${(user.fullname, user.email)} created successfully`);
+    });
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 // Login Route
+  const jwt = require("jsonwebtoken");
 
-const jwb = require("jsonwebtoken");
+  // Login
+  router.post("/login", (req, res) => {
+    try {
+      let sql = "SELECT * FROM users WHERE ?";
+      let user = {
+        email: req.body.email,
+      };
+      con.query(sql, user, async (err, result) => {
+        if (err) throw err;
+        if (result.length === 0) {
+          res.send("Email not found please register");
+        } else {
+          const isMatch = await bcrypt.compare(
+            req.body.password,
+            result[0].password
+          );
+          if (!isMatch) {
+            res.send("Password incorrect");
+          } else {
+            // The information the should be stored inside token
+            const payload = {
+              user: {
+                user_id: result[0].user_id,
+                fullname: result[0].fullname,
+                email: result[0].email,
+                userRole: result[0].userRole,
+                phone: result[0].phone,
+                joinDate: result[0].joinDate
+              },
+            };
+            // Creating a token and setting expiry date
+            jwt.sign(
+              payload,
+              process.env.jwtSecret,
+              {
+                expiresIn: "365d",
+              },
+              (err, token) => {
+                if (err) throw err;
+                res.json({ token });
+              }
+            );
+          }
+        }
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  });
 
-router.post("/login", (req, res) => {
-  return authController.Login(req, res);
-});
 
 // Verify Route
 

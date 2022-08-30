@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const con = require("../lib/dbConnection");
+const middleware = require("../middleware/auth");
+const jwt = require("jsonwebtoken"); 
 
 // Getting All Users
 
@@ -22,6 +24,21 @@ router.get("/:id", (req, res) => {
   try {
     con.query(
       `SELECT * FROM users WHERE user_id = ${req.params.id}`,
+      (err, result) => {
+        if (err) throw err;
+        res.send(result);
+      }
+    );
+  } catch (error) {
+    console.log(error);
+    res.status(400).send(error);
+  }
+});
+//Delete a single user
+router.delete("/:id", (req, res) => {
+  try {
+    con.query(
+      `DELETE users WHERE user_id = ${req.params.id}`,
       (err, result) => {
         if (err) throw err;
         res.send(result);
@@ -68,7 +85,7 @@ router.put("/:id", (req, res) => {
 router.delete("/:id", (req, res) => {
   try {
     con.query(
-      `DELETE FROM users WHERE user_id = ${req.params.id}`,
+      `DELETE users WHERE user_id = ${req.params.id}`,
       (err, result) => {
         if (err) throw err;
         res.send(result);
@@ -128,8 +145,7 @@ router.post("/register", (req, res) => {
   }
 });
 
-// Login Route
-  const jwt = require("jsonwebtoken");
+// Login Rout
 
   // Login
   router.post("/login", (req, res) => {
@@ -195,8 +211,6 @@ router.get("/verify", (req, res) => {
     }
   });
 });
-
-const middleware = require("../middleware/auth");
 
 router.get("/", middleware, (req, res) => {
   try {

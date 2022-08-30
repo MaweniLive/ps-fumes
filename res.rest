@@ -1,0 +1,7 @@
+POST https://ps-fumes.herokuapp.com/users/login
+Content-Type: application/json
+
+{
+    "email": "girl@gmail.co.za",
+    "password": "password"
+}

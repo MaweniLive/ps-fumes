@@ -1,4 +1,4 @@
-/* //fetch user data and display
+ //fetch user data and display
 fetch("http://localhost:30004/users")
   .then((res) => res.json())
   .then((data) => {
@@ -13,5 +13,5 @@ fetch("http://localhost:30004/users")
                  <td>${i.joinDate}</td>
                  </tr>`;
     });
-  }); */
+  });
 

@@ -1,4 +1,4 @@
-/* //fetch products data and display
+//fetch products data and display
  fetch("http://localhost:30004/products")
    .then((res) => res.json())
    .then((data) => {
@@ -14,4 +14,4 @@
                   <td>${i.quantity}</td>
                   </tr>`;
      });
-   }); */
+   }); 
